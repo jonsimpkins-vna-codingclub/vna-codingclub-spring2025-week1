@@ -1,0 +1,241 @@
+<html>
+<head>
+    <title>VNA Coding Club, Week 1</title>
+
+    <link href="helpers/styles.css" rel="stylesheet" />
+
+    <script src="helpers/helper_methods.js"></script>
+    <script type="text/javascript">window.addEventListener('error', onError);</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <h1 class="headline">VNA Coding Club, Week 1</h1>
+
+    <div class="wrapper">
+        <div class="wrapper-direct-child">
+            <div class="button-row">
+                <button id="prev-btn" onclick="prevInstructions()"><-</button>
+                <button id="next-btn" onclick="nextInstructions()">-></button>
+            </div>
+            <div id="instructions"></div>
+        </div>
+        
+        <div class="wrapper-direct-child">
+            <button id="execute-button" onclick="executeBtn()"></button>
+
+            <div id="success-msg" onclick="location.reload()"></div>
+
+            <div>Output:</div>
+            <pre id="error"></pre>
+            
+            <pre id="console">... this is where the code output will go...</pre>
+        </div>
+    </div>
+
+    
+<!-- Step-by-step instructions, in Markdown -->
+<script id="step0" type="text/plain">
+# Step 0
+
+First off: **Welcome Back**
+
+As a quick overview to how this setup will work:
+
+* Instructions will be on the left here
+* You can run your code (and see output / errors / success) on the right
+
+## How to Log Values
+
+If you want to write some value to the Output logs on the right, you
+can use the `log()` method. For example:
+
+```
+log("foo");
+log(99 + 2)
+```
+
+would write
+
+```
+foo
+101
+```
+
+to the output console.
+
+> **CHALLENGE**: Update the `step0()` method in `step_0.js` to log a message with the word "hello" in it.
+
+</script>
+
+<script id="step1" type="text/plain">
+# Step 1
+
+Alright, now for a quick refresher on arrays.
+
+## Arrays
+
+When we want to store "a list of things in a particular order",
+the variable type we use is an **Array**. In Javascript, an array
+is written as a comma-separate list of things, with `[` and `]` at
+either end:
+
+```
+let myArray = [1, 2, 3];
+let otherArray = ['foo', 'bar', 'baz'];
+```
+
+You can grab the length of the array with the `.length` property,
+and you can grab items out of the array by specifying the 0-based
+"index" of the item. As an example, the code:
+
+```
+let someGroceries = ['apple', 'orange', 'cherry'];
+
+log('Number of groceries:');
+log(someGroceries.length);
+
+log('Middle item in list:');
+log(someGroceries[1]);
+```
+
+will log
+
+```
+Number of grocieries:
+3
+Middle item in list:
+orange
+```
+
+> **CHALLENGE**: Update the `step1()` method in `step_1.js` to log the first and last elements of
+the list provided to the function (it'll be a random list every time).
+
+</script>
+
+<script id="step2" type="text/plain">
+# Step 2
+
+Time to review boolean logic and for loops!
+
+## Boolean Logic
+
+A `boolean` is a type of value that represents something that is `true` or `false`. The 6 boolean
+operators we covered in the fall were:
+
+* `==` - this checks if two elements are equal to each other
+* `<` and `>` - these check if one element is greater than another
+* `<=` and `>=` - these check if one element is greater than **or equal to** another
+* `!` - this is the `negation` operator, it takes a true or false value and flips it to the opposite
+
+As an example:
+
+```
+let a = 5;
+let b = 5;
+let c = 100;
+
+let value1 = (a == b) // true
+let value2 = (a < b) // false
+let value3 = (b >= a) // true
+let value4 = !(a == c) // true
+```
+
+> **PAUSE**: Does it make sense why `value4` is `true`? It's because `a == c` is false, but the `!`
+in front then gives you the opposite of false, which is `true`.
+
+You can also use `&&` (and) and `||` (or) to combine boolean values together. For example:
+
+```
+function isNumberPrimeLessThan10(myNumber) {
+    if (!(myNumber > 0 && myNumber <= 9)) {
+        // Number is outside the range of 1-9
+        return false;
+    }
+
+    return (myNumber == 2 || myNumber == 3 || myNumber == 5 || myNumber == 7);
+}
+```
+
+## For Loops
+
+A for loop is a way to repeat code a certain number of times, where each time the code executes,
+it knows which iteration it's on. An example would be:
+
+```
+for (let i = 3; i < 7; i++) {
+    log(2 * i);
+}
+```
+
+In this example:
+* `let i = 3` - this says that `i` is going to be the name of the variable keeping track of which
+iteration we're on, and we'll start with `i` being equal to `3`
+* `i < 7` - this says that as long as `i` is less than `7`, we keep looping
+* `i++` - this say that after every loop, we'll increase the value of `i` by one
+
+The above for loop code would log:
+
+```
+6
+8
+10
+12
+```
+
+> **PAUSE**: Does it make sense why the value `14` is never logged? It's because `i < 7` does not hold
+true when `i` is equal to 7, so the code inside the for loop doesn't run when we get up that high.
+
+## Putting it Together
+
+For the Step 2 challenge, we'll give you an array containing 1000 votes for what type of pizza we should
+get, and you'll need to:
+
+* Implement a method `isVoteForPineapple()` to figure out if a specific vote is for pineapple or not
+* Use that method to count up how many pineapple votes
+
+If you need to review any information about arrays, feel free to go back to the Step 1 instructions
+by clicking the "<-" button up at the top of this panel.
+
+> **CHALLENGE**: Update the `step2()` method in `step_2.js` to tally up the number of votes for
+pineapple pizza and log the count of those votes.
+
+</script>
+<script id="step3" type="text/plain">
+# Step 3
+
+And finally a new topic: maps.
+
+## Maps
+
+A `Map` (also sometimes called a "dictionary" in certain programming languages) is a way to store
+a bunch of different values each by name, and be able to fetch values very quickly. For example,
+you could use a Map to store phone numbers, organized by each persons name:
+
+```
+let phoneBookMap = new Map();
+let phoneBookMap.set('Jon', 1234567);
+let phoneBookMap.set('Susie', 9876543);
+
+let susiePhoneNumber = phoneBookMap.get('Susie'); // 9876543
+let doWeHaveBobsNumber = phoneBookMap.has('Bob'); // false
+```
+
+In the above example:
+* `new Map()` - this is how we create a new empty map
+* `.set('Jon', 1234567)` - this is how we put the value `1234567` into the map, under the "key" of `'Jon'`
+(the "key" is how we can retrieve this value later)
+* `.get('Susie')` - this is how we can retrieve a value that we put in the map previously
+* `.has('Bob')` - this is how we can see if the map already contains a value for a particular key
+
+> **CHALLENGE**: Update the `step3()` method in `step_3.js` to tally up the number of votes for
+each type of pizza and log the count of **all** those votes.
+
+</script>
+
+    <!-- This script runs at the end, intentionally -->
+    <script>
+        documentReady();
+    </script>
+</body>
+</html>
